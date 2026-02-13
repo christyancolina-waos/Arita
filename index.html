@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Arita: 3 Semanas</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. FONDO ANIMADO --- */
+        @keyframes subtleGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- 2. ANIMACIÓN DE ENTRADA --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Estilos Generales --- */
+        body {
+            /* Degradado de fondo con movimiento lento */
+            background: linear-gradient(-45deg, #fce4ec, #fff8e1, #ffe0b2, #f8bbd0);
+            background-size: 400% 400%;
+            animation: subtleGradient 15s ease infinite;
+
+            font-family: 'Playfair Display', serif; /* Fuente base más elegante */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Contenedor Principal (Flexbox) MODIFICADO PARA COLUMNA */
+        .main-wrapper {
+            display: flex;
+            flex-direction: column; /* Cambiado a columna para apilar verticalmente */
+            align-items: center;    /* Centrar elementos horizontalmente */
+            justify-content: flex-start;
+            gap: 30px;
+            max-width: 1400px;
+            width: 100%;
+            margin: 20px auto;
+        }
+
+        /* --- Estilos de la CARTA (Centro) --- */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px; /* Bordes más suaves */
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2); /* Sombra con toque rosa */
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            border: 1px solid #ff708b; /* Borde delicado */
+            flex-shrink: 0; 
+            
+            /* Animación de entrada para la carta */
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        /* Estilos de texto */
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 { 
+            color: #e91e63; 
+            font-family: 'Great Vibes', cursive; /* Fuente manuscrita para título */
+            font-size: 2.8em; 
+            margin: 0; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .header p { font-style: italic; color: #888; font-size: 0.9em; } 
+        
+        .saludo { 
+            font-size: 1.5em; /* Saludo más grande */
+            margin-bottom: 20px; 
+            font-family: 'Great Vibes', cursive; /* Manuscrito para el saludo */
+            color: #d81b60; /* Rosa profundo */
+        }
+        
+        .cuerpo p { 
+            margin-bottom: 18px; 
+            text-indent: 0; 
+            text-align: justify;
+            font-size: 1.05em;
+        }
+        
+        .firma { margin-top: 40px; text-align: right; }
+        .firma p { 
+            font-family: 'Great Vibes', cursive; /* Manuscrito para la firma */
+            font-weight: bold; 
+            font-size: 1.8em; 
+            color: #e91e63; 
+        }
+
+        /* --- NUEVOS ESTILOS PARA LA IMAGEN GRANDE INFERIOR --- */
+        .bottom-image-wrapper {
+            width: 100%;
+            max-width: 800px; /* Un poco más ancha que la carta para resaltar */
+            
+            /* Animación de entrada con retraso */
+            animation: fadeIn 1.5s ease-out;
+            animation-delay: 0.5s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .bottom-image-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
+            border: 6px solid #fff; /* Marco blanco un poco más grueso para la imagen grande */
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+         /* Efecto hover para la imagen grande */
+        .bottom-image-wrapper img:hover {
+             transform: scale(1.02);
+             box-shadow: 0 0 20px #e91e63, 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+
+        /* --- ESTILOS PARA EL AUDIO Y EL BOTÓN DE REPRODUCCIÓN --- */
+        #music-toggle {
+            position: fixed; /* Fijo en la esquina */
+            bottom: 20px;
+            right: 20px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%; /* Botón redondo */
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 100; /* Asegura que esté encima de todo */
+            transition: background-color 0.3s ease;
+        }
+        #music-toggle:hover {
+            background-color: #d81b60;
+        }
+
+
+        /* --- MODO CELULAR (Responsive) MODIFICADO --- */
+        @media (max-width: 1000px) {
+            /* Ya estamos en modo columna por defecto, solo ajustamos anchos */
+            .main-wrapper {
+                gap: 25px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 25px;
+            }
+
+            .bottom-image-wrapper {
+                width: 95%; /* Que ocupe casi todo el ancho en celular */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <audio id="background-music" loop autoplay muted>
+        <source src="perfect.m4a" type="audio/mp4">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <button id="music-toggle" onclick="toggleMute()">🔇</button>
+
+    <div class="main-wrapper">
+        
+        <div class="container">
+            <div class="header">
+                <h1>Para Arita</h1>
+                <p>Puerto Cabello, 15/12/25</p>
+            </div>
+
+            <div class="saludo">
+                Arita,
+            </div>
+
+            <div class="cuerpo">
+                <p>
+                    Me parece increíble que ya hayan pasado tres maravillosas semanas de habernos conocido, de haber empezado esta pequeña gran aventura juntos. Parece que no fue hace mucho, pero a la vez, siento que te conozco de casi toda la vida. Tres semanas pueden parecer poco, pero para mí, cada día ha sido como un capítulo nuevo en esta maravillosa historia que tenemos juntos, historia que para mí es como el tesoro más preciado que tengo.
+                </p>
+                <p>
+                    Desde el momento en el que charlamos por primera vez me parecía muy irreal, tampoco sabía qué podría pasar a continuación ya que nunca me imaginé que eso podría suceder, pero con el tiempo, mientras seguimos conversando me dí cuenta de algo, me dí cuenta de lo muy especial que eres y la increíble persona la cual me encontré. Algunas de las cosas que me han mantenido enganchado este tiempo han sido lo increíblemente graciosa y divertida que eres, la forma en la que te expresas, tu apoyo y tu cariño, que aunque
