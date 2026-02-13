@@ -21,6 +21,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- 3. NUEVA ANIMACIÓN: FLOTACIÓN SUAVE PARA LA FOTO --- */
+        /* Esto hace que se vea "viva" en el celular sin necesidad de tocarla */
+        @keyframes floating {
+            0% { transform: rotate(-3deg) translateY(0px); box-shadow: 0 15px 30px rgba(233, 30, 99, 0.3); }
+            50% { transform: rotate(-3deg) translateY(-12px); box-shadow: 0 25px 40px rgba(233, 30, 99, 0.2); }
+            100% { transform: rotate(-3deg) translateY(0px); box-shadow: 0 15px 30px rgba(233, 30, 99, 0.3); }
+        }
+
         /* --- Estilos Generales --- */
         body {
             background: linear-gradient(-45deg, #fce4ec, #fff8e1, #ffe0b2, #f8bbd0);
@@ -34,6 +42,7 @@
             padding: 10px;
             min-height: 100vh;
             box-sizing: border-box;
+            overflow-x: hidden; /* Evita scroll horizontal en móviles */
         }
 
         /* Contenedor Principal */
@@ -42,22 +51,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            gap: 30px;
+            gap: 40px; /* Un poco más de espacio entre carta y foto */
             max-width: 1400px;
             width: 100%;
-            margin: 20px auto;
+            margin: 20px auto 60px auto; /* Margen inferior extra para el botón de música */
         }
 
         /* --- Estilos de la CARTA --- */
         .container {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.95); /* Un poco más transparente */
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.15);
             max-width: 600px;
             width: 100%;
             text-align: left;
-            border: 1px solid #ff708b;
+            border: 1px solid #ffbdc9;
             flex-shrink: 0; 
             animation: fadeIn 1.5s ease-out;
         }
@@ -66,15 +75,15 @@
         .header h1 { 
             color: #e91e63; 
             font-family: 'Great Vibes', cursive;
-            font-size: 2.8em; 
+            font-size: 3em; /* Un poquito más grande el título */
             margin: 0; 
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.1);
         }
         
-        .header p { font-style: italic; color: #888; font-size: 0.9em; } 
+        .header p { font-style: italic; color: #999; font-size: 0.9em; letter-spacing: 1px;} 
         
         .saludo { 
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin-bottom: 20px; 
             font-family: 'Great Vibes', cursive;
             color: #d81b60;
@@ -85,64 +94,102 @@
             text-indent: 0; 
             text-align: justify;
             font-size: 1.05em;
+            color: #444;
         }
         
         .firma { margin-top: 40px; text-align: right; }
         .firma p { 
             font-family: 'Great Vibes', cursive;
-            font-weight: bold; 
-            font-size: 1.8em; 
+            font-weight: normal; 
+            font-size: 2em; 
             color: #e91e63; 
+            margin: 5px 0;
         }
 
-        /* --- ESTILOS PARA LA IMAGEN ÚNICA ABAJO --- */
+        /* --- ESTILOS "LINDS" PARA LA IMAGEN ÚNICA (ESTILO POLAROID FLOTANTE) --- */
         .bottom-image-wrapper {
-            width: 100%;
-            max-width: 800px;
-            animation: fadeIn 1.5s ease-out;
-            animation-delay: 0.5s;
-            opacity: 0;
-            animation-fill-mode: forwards;
+            width: auto;
+            max-width: 90%; /* Que no ocupe todo el ancho en móvil para que se vea el efecto */
+            
+            /* Creamos el marco estilo Polaroid */
+            background-color: #fff;
+            padding: 15px 15px 60px 15px; /* Mucho espacio abajo para el estilo polaroid */
+            border-radius: 4px; /* Bordes del papel apenas redondeados */
+            
+            /* Sombra suave inicial */
+            box-shadow: 0 15px 30px rgba(233, 30, 99, 0.3);
+            
+            /* Animaciones de entrada y flotación */
+            opacity: 0; /* Empieza invisible para el fadeIn */
+            /* Combinamos la entrada (fadeIn) y luego la flotación continua (floating) */
+            animation: fadeIn 1.5s ease-out 0.5s forwards, floating 6s ease-in-out 2s infinite;
+            
+            /* Rotación inicial para que se vea coqueta e inclinada */
+            transform: rotate(-3deg); 
+            
+             /* Textura sutil de papel */
+             background-image: linear-gradient(to bottom right, #ffffff, #fbfbfb);
+             border: 1px solid #f0f0f0;
         }
 
         .bottom-image-wrapper img {
             width: 100%;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
-            border: 6px solid #fff;
-            object-fit: cover;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+            border-radius: 2px; /* La foto interna tiene bordes casi rectos */
+            /* Un pequeño borde interno para darle profundidad a la foto dentro del papel */
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
 
+        /* Eliminamos el hover en móvil porque ya está flotando */
         .bottom-image-wrapper img:hover {
-             transform: scale(1.02);
-             box-shadow: 0 0 20px #e91e63, 0 10px 20px rgba(0,0,0,0.2);
+             transform: none;
+             box-shadow: none;
         }
 
         /* --- AUDIO Y BOTÓN --- */
         #music-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #e91e63;
+            bottom: 25px;
+            right: 25px;
+            background-color: rgba(233, 30, 99, 0.9); /* Un poco transparente */
             color: white;
             border: none;
-            padding: 10px 15px;
+            width: 55px; /* Tamaño fijo para que sea un círculo perfecto */
+            height: 55px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5em;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 1.8em;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.4);
             z-index: 100;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px); /* Efecto borroso bonito detrás del botón */
         }
-        #music-toggle:hover {
+        #music-toggle:hover, #music-toggle:active {
             background-color: #d81b60;
+            transform: scale(1.1); /* Crece un poquito al tocarlo */
         }
 
-        @media (max-width: 1000px) {
-            .container { width: 95%; padding: 25px; }
-            .bottom-image-wrapper { width: 95%; }
+        @media (max-width: 768px) {
+            .container { 
+                width: 90%; 
+                padding: 30px 20px; 
+            }
+            .header h1 { font-size: 2.5em; }
+            
+            /* En celular, la imagen puede ser un poco más ancha */
+            .bottom-image-wrapper { 
+                max-width: 85%; 
+            }
+            
+            .main-wrapper {
+                gap: 30px;
+                margin-bottom: 80px; /* Más espacio abajo en el móvil para el botón */
+            }
         }
     </style>
 </head>
@@ -153,7 +200,7 @@
         Tu navegador no soporta el elemento de audio.
     </audio>
 
-    <button id="music-toggle" onclick="toggleMute()">🔇</button>
+    <button id="music-toggle" onclick="toggleMute()" ontouchstart="">🔇</button>
 
     <div class="main-wrapper">
         
@@ -199,6 +246,9 @@
             const audio = document.getElementById('background-music');
             const button = document.getElementById('music-toggle');
             
+            // Efecto de vibración sutil al tocar el botón en móviles (si el navegador lo soporta)
+            if (navigator.vibrate) { navigator.vibrate(50); }
+
             if (audio.muted) {
                 audio.muted = false;
                 audio.play().catch(error => {
