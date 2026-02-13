@@ -23,12 +23,11 @@
 
         /* --- Estilos Generales --- */
         body {
-            /* Degradado de fondo con movimiento lento */
             background: linear-gradient(-45deg, #fce4ec, #fff8e1, #ffe0b2, #f8bbd0);
             background-size: 400% 400%;
             animation: subtleGradient 15s ease infinite;
 
-            font-family: 'Playfair Display', serif; /* Fuente base más elegante */
+            font-family: 'Playfair Display', serif;
             color: #333;
             line-height: 1.6;
             margin: 0;
@@ -37,11 +36,11 @@
             box-sizing: border-box;
         }
 
-        /* Contenedor Principal (Flexbox) MODIFICADO PARA COLUMNA */
+        /* Contenedor Principal */
         .main-wrapper {
             display: flex;
-            flex-direction: column; /* Cambiado a columna para apilar verticalmente */
-            align-items: center;    /* Centrar elementos horizontalmente */
+            flex-direction: column;
+            align-items: center;
             justify-content: flex-start;
             gap: 30px;
             max-width: 1400px;
@@ -49,27 +48,24 @@
             margin: 20px auto;
         }
 
-        /* --- Estilos de la CARTA (Centro) --- */
+        /* --- Estilos de la CARTA --- */
         .container {
             background-color: #ffffff;
             padding: 40px;
-            border-radius: 20px; /* Bordes más suaves */
-            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2); /* Sombra con toque rosa */
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
             max-width: 600px;
             width: 100%;
             text-align: left;
-            border: 1px solid #ff708b; /* Borde delicado */
+            border: 1px solid #ff708b;
             flex-shrink: 0; 
-            
-            /* Animación de entrada para la carta */
             animation: fadeIn 1.5s ease-out;
         }
 
-        /* Estilos de texto */
         .header { text-align: center; margin-bottom: 25px; }
         .header h1 { 
             color: #e91e63; 
-            font-family: 'Great Vibes', cursive; /* Fuente manuscrita para título */
+            font-family: 'Great Vibes', cursive;
             font-size: 2.8em; 
             margin: 0; 
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
@@ -78,10 +74,10 @@
         .header p { font-style: italic; color: #888; font-size: 0.9em; } 
         
         .saludo { 
-            font-size: 1.5em; /* Saludo más grande */
+            font-size: 1.5em;
             margin-bottom: 20px; 
-            font-family: 'Great Vibes', cursive; /* Manuscrito para el saludo */
-            color: #d81b60; /* Rosa profundo */
+            font-family: 'Great Vibes', cursive;
+            color: #d81b60;
         }
         
         .cuerpo p { 
@@ -93,18 +89,16 @@
         
         .firma { margin-top: 40px; text-align: right; }
         .firma p { 
-            font-family: 'Great Vibes', cursive; /* Manuscrito para la firma */
+            font-family: 'Great Vibes', cursive;
             font-weight: bold; 
             font-size: 1.8em; 
             color: #e91e63; 
         }
 
-        /* --- NUEVOS ESTILOS PARA LA IMAGEN GRANDE INFERIOR --- */
+        /* --- ESTILOS PARA LA IMAGEN ÚNICA ABAJO --- */
         .bottom-image-wrapper {
             width: 100%;
-            max-width: 800px; /* Un poco más ancha que la carta para resaltar */
-            
-            /* Animación de entrada con retraso */
+            max-width: 800px;
             animation: fadeIn 1.5s ease-out;
             animation-delay: 0.5s;
             opacity: 0;
@@ -116,61 +110,46 @@
             height: auto;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
-            border: 6px solid #fff; /* Marco blanco un poco más grueso para la imagen grande */
+            border: 6px solid #fff;
             object-fit: cover;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-         /* Efecto hover para la imagen grande */
         .bottom-image-wrapper img:hover {
              transform: scale(1.02);
              box-shadow: 0 0 20px #e91e63, 0 10px 20px rgba(0,0,0,0.2);
         }
 
-
-        /* --- ESTILOS PARA EL AUDIO Y EL BOTÓN DE REPRODUCCIÓN --- */
+        /* --- AUDIO Y BOTÓN --- */
         #music-toggle {
-            position: fixed; /* Fijo en la esquina */
+            position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #e91e63;
             color: white;
             border: none;
             padding: 10px 15px;
-            border-radius: 50%; /* Botón redondo */
+            border-radius: 50%;
             cursor: pointer;
             font-size: 1.5em;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 100; /* Asegura que esté encima de todo */
+            z-index: 100;
             transition: background-color 0.3s ease;
         }
         #music-toggle:hover {
             background-color: #d81b60;
         }
 
-
-        /* --- MODO CELULAR (Responsive) MODIFICADO --- */
         @media (max-width: 1000px) {
-            /* Ya estamos en modo columna por defecto, solo ajustamos anchos */
-            .main-wrapper {
-                gap: 25px;
-            }
-
-            .container {
-                width: 95%;
-                padding: 25px;
-            }
-
-            .bottom-image-wrapper {
-                width: 95%; /* Que ocupe casi todo el ancho en celular */
-            }
+            .container { width: 95%; padding: 25px; }
+            .bottom-image-wrapper { width: 95%; }
         }
     </style>
 </head>
 <body>
     
     <audio id="background-music" loop autoplay muted>
-        <source src="perfect.m4a" type="audio/mp4">
+        <source src="audio.opus" type="audio/ogg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
@@ -193,4 +172,44 @@
                     Me parece increíble que ya hayan pasado tres maravillosas semanas de habernos conocido, de haber empezado esta pequeña gran aventura juntos. Parece que no fue hace mucho, pero a la vez, siento que te conozco de casi toda la vida. Tres semanas pueden parecer poco, pero para mí, cada día ha sido como un capítulo nuevo en esta maravillosa historia que tenemos juntos, historia que para mí es como el tesoro más preciado que tengo.
                 </p>
                 <p>
-                    Desde el momento en el que charlamos por primera vez me parecía muy irreal, tampoco sabía qué podría pasar a continuación ya que nunca me imaginé que eso podría suceder, pero con el tiempo, mientras seguimos conversando me dí cuenta de algo, me dí cuenta de lo muy especial que eres y la increíble persona la cual me encontré. Algunas de las cosas que me han mantenido enganchado este tiempo han sido lo increíblemente graciosa y divertida que eres, la forma en la que te expresas, tu apoyo y tu cariño, que aunque
+                    Desde el momento en el que charlamos por primera vez me parecía muy irreal, tampoco sabía qué podría pasar a continuación ya que nunca me imaginé que eso podría suceder, pero con el tiempo, mientras seguimos conversando me dí cuenta de algo, me dí cuenta de lo muy especial que eres y la increíble persona la cual me encontré. Algunas de las cosas que me han mantenido enganchado este tiempo han sido lo increíblemente graciosa y divertida que eres, la forma en la que te expresas, tu apoyo y tu cariño, que aunque ciertamente te cuesta en un principio, cuándo lo haces se convierte en un momento muy especial el cuál no voy a olvidar.
+                </p>
+                <p>
+                    Gracias por haberme dado la oportunidad de pasar este tiempo contigo, estando para ti y aprendiendo más sobre ti, sobre la increíble mujer que me tiene tan enamorado. Contigo me siento inimaginablemente feliz y me siento muy emocionado por todo lo que nos espera. Espero celebrar muchas más semanas, meses y años contigo compartiendo nuestras risas, sueños, metas y momentos. Claramente apoyándote y siempre estando para ti cuando más me necesites.
+                </p>
+                <p>
+                    Te amo como no puedes imaginar.
+                </p>
+            </div>
+
+            <div class="firma">
+                <p>Con todo mi amor,</p>
+                <p>Chris.</p>
+            </div>
+        </div>
+
+        <div class="bottom-image-wrapper">
+            <img src="1.png" alt="Un recuerdo especial con Arita">
+        </div>
+
+    </div>
+
+    <script>
+        function toggleMute() {
+            const audio = document.getElementById('background-music');
+            const button = document.getElementById('music-toggle');
+            
+            if (audio.muted) {
+                audio.muted = false;
+                audio.play().catch(error => {
+                    console.log("La reproducción automática falló.");
+                }); 
+                button.innerHTML = '🔊';
+            } else {
+                audio.muted = true;
+                button.innerHTML = '🔇';
+            }
+        }
+    </script>
+</body>
+</html>
